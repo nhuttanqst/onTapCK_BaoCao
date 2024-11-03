@@ -65,12 +65,11 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          source={require("../assets/Data/icon.png")}
+          source={require("../assets/Data/iconLogin.png")}
           style={styles.logo}
         />
       </View>
-      <Text style={styles.title}>Hello Again!</Text>
-      <Text style={styles.subtitle}>Log into your account</Text>
+      <Text style={styles.title}>Login account</Text>
       <View>
         <View style={styles.inputContainer}>
           <Ionicons
@@ -178,25 +177,19 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: 40,
+    marginTop: 15,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 220,
+    height: 220,
     resizeMode: "contain",
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "gray",
-    textAlign: "center",
-    marginBottom: 20,
+    marginTop: -20,
+    marginBottom: 25,
   },
   inputContainer: {
     flexDirection: "row",
@@ -224,7 +217,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   continueButton: {
-    backgroundColor: "#0ad4fa",
+    backgroundColor: "#0b75a9",
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",

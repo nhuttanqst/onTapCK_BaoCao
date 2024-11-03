@@ -62,16 +62,52 @@ app.get("/user/:email", (req, res) => {
   });
 });
 
+// app.post("/signup", (req, res) => {
+//   const sql = "INSERT INTO login (name, email, password) VALUES (?,?,?)";
+//   const { name, email, password } = req.body;
+//   db.query(sql, [name, email, password], (err, data) => {
+//     if (err) {
+//       console.log("Error inserting data:", err);
+//       return res.json("Error");
+//     } else {
+//       console.log("Data inserted successfully:", data);
+//       return res.json(data);
+//     }
+//   });
+// });
+
 app.post("/signup", (req, res) => {
-  const sql = "INSERT INTO login (name, email, password) VALUES (?,?,?)";
   const { name, email, password } = req.body;
-  db.query(sql, [name, email, password], (err, data) => {
+
+  const checkEmailSql = "SELECT * FROM login WHERE email = ?";
+  db.query(checkEmailSql, [email], (err, data) => {
     if (err) {
-      console.log("Error inserting data:", err);
-      return res.json("Error");
+      console.log("Error checking email:", err);
+      return res
+        .status(500)
+        .json({ status: "Error", message: "Internal server error" });
+    }
+
+    if (data.length > 0) {
+      return res
+        .status(400)
+        .json({ status: "Error", message: "Email already exists" });
     } else {
-      console.log("Data inserted successfully:", data);
-      return res.json(data);
+      const insertSql =
+        "INSERT INTO login (name, email, password) VALUES (?,?,?)";
+      db.query(insertSql, [name, email, password], (err, data) => {
+        if (err) {
+          console.log("Error inserting data:", err);
+          return res
+            .status(500)
+            .json({ status: "Error", message: "Internal server error" });
+        } else {
+          console.log("Data inserted successfully:", data);
+          return res
+            .status(200)
+            .json({ status: "Success", message: "Registration successful" });
+        }
+      });
     }
   });
 });

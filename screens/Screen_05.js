@@ -329,14 +329,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalButton: {
-    backgroundColor: "#00bdd6",
+    backgroundColor: "red",
     padding: 10,
     borderRadius: 10,
     alignItems: "center",
     width: "45%",
   },
   modalButtonCancel: {
-    backgroundColor: "red",
+    backgroundColor: "#00bdd6",
     padding: 10,
     borderRadius: 10,
     alignItems: "center",

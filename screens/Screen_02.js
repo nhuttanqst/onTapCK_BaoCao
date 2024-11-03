@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     flex: 1,
-    backgroundColor: "#5958b2",
+    backgroundColor: "red",
     padding: 12,
     borderRadius: 5,
     marginHorizontal: 5,
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
   },
   modalButtonCancel: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: "#5958b2",
     padding: 12,
     borderRadius: 5,
     marginHorizontal: 5,

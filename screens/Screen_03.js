@@ -27,6 +27,7 @@ const Screen_03 = ({ navigation }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleSubmit = () => {
     setErrors(validation(values));
@@ -42,13 +43,28 @@ const Screen_03 = ({ navigation }) => {
     ) {
       axios
         .post("http://localhost:8081/signup", values)
-        .then(() => {
+        .then((response) => {
+          if (response.data.status === "Success") {
+            setModalMessage("Registration successful!");
+          } else {
+            setModalMessage(response.data.message);
+          }
           setModalVisible(true);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          if (err.response && err.response.data && err.response.data.message) {
+            setModalMessage(err.response.data.message);
+          } else {
+            setModalMessage("An error occurred during registration.");
+          }
+          setModalVisible(true);
+        })
         .finally(() => setIsSubmitting(false));
-    } else setIsSubmitting(false);
-  }, [errors, isSubmitting, navigation, values]);
+    } else {
+      setIsSubmitting(false);
+    }
+  }, [errors, isSubmitting, values]);
 
   return (
     <KeyboardAvoidingView
@@ -68,7 +84,10 @@ const Screen_03 = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.header}>
-            <Image source={require("../assets/Data/Image19.png")} />
+            <Image
+              style={{ width: 220, height: 220, marginTop: -40 }}
+              source={require("../assets/Data/iconLogin.png")}
+            />
             <Text style={styles.text1}>Nice to see you!</Text>
             <Text style={styles.text2}>Create your account</Text>
           </View>
@@ -85,7 +104,7 @@ const Screen_03 = ({ navigation }) => {
                   console.log(values);
                 }}
                 style={styles.textInput}
-                placeholder="Enter your user name"
+                placeholder="Enter your name"
               />
               {errors.name && (
                 <Text style={{ color: "red", marginTop: 5 }}>
@@ -170,17 +189,21 @@ const Screen_03 = ({ navigation }) => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
-          navigation.navigate("Screen_01");
+          if (modalMessage === "Registration successful!") {
+            navigation.navigate("Screen_01");
+          }
         }}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Registration Successful!</Text>
+            <Text style={styles.modalText}>{modalMessage}</Text>
             <TouchableOpacity
               style={styles.modalButton}
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate("Screen_01");
+                if (modalMessage === "Registration successful!") {
+                  navigation.navigate("Screen_01");
+                }
               }}
             >
               <Text style={styles.modalButtonText}>OK</Text>
@@ -200,13 +223,13 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: "center",
-    marginVertical: 30,
+    marginBottom: 30,
   },
   text1: {
     fontSize: 35,
     fontWeight: "600",
-    marginTop: 15,
     color: "#30353a",
+    marginTop: -25,
   },
   text2: {
     fontSize: 16,
@@ -250,7 +273,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   button: {
-    backgroundColor: "#28c4dc",
+    backgroundColor: "#0b75a9",
     padding: 15,
     borderRadius: 15,
   },
