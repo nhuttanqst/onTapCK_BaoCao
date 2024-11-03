@@ -57,103 +57,105 @@ const Screen_04 = ({ route }) => {
 
   return (
     <View style={{ backgroundColor: "#fff", flex: 1, padding: 20 }}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Screen_02", { email })}
-      >
-        <AntDesign name="arrowleft" size={24} color="black" />
-      </TouchableOpacity>
-      <View
-        style={{
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Image
-          style={{ width: 120, height: 120 }}
-          source={require("../assets/Data/avatar.png")}
-        />
-        <Text
+      <ScrollView style={{ height: 400, width: "100%" }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Screen_02", { email })}
+        >
+          <AntDesign name="arrowleft" size={24} color="black" />
+        </TouchableOpacity>
+        <View
           style={{
-            fontSize: 25,
-            fontWeight: "700",
-            marginTop: 8,
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {userName}
-        </Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Screen_05", { email })}
-        >
+          <Image
+            style={{ width: 120, height: 120 }}
+            source={require("../assets/Data/avatar.png")}
+          />
           <Text
             style={{
-              marginTop: 10,
-              fontSize: 20,
-              fontWeight: "500",
-              color: "#333",
+              fontSize: 25,
+              fontWeight: "700",
+              marginTop: 8,
             }}
           >
-            Edit Profile
+            {userName}
           </Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 25,
-        }}
-      >
-        <View
-          style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "700" }}>{followers}</Text>
-          <Text style={{ fontSize: 14, fontWeight: "500" }}>Followers</Text>
-        </View>
-        <View style={{ width: 1, height: 45, backgroundColor: "#ddd" }} />
-        <View
-          style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "700" }}>{posts}</Text>
-          <Text style={{ fontSize: 14, fontWeight: "500" }}>Post</Text>
-        </View>
-        <View style={{ width: 1, height: 45, backgroundColor: "#ddd" }} />
-        <View
-          style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
-        >
-          <Text style={{ fontSize: 18, fontWeight: "700" }}>{reviews}</Text>
-          <Text style={{ fontSize: 14, fontWeight: "500" }}>Reviews</Text>
-        </View>
-      </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        <View>
-          <Text style={styles.title}>My photos</Text>
-        </View>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity>
-            <Image
-              source={require("../assets/Data/profile1.jpg")}
-              style={styles.image}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("../assets/Data/profile2.jpg")}
-              style={styles.image}
-            />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Screen_05", { email })}
+          >
+            <Text
+              style={{
+                marginTop: 10,
+                fontSize: 20,
+                fontWeight: "500",
+                color: "#333",
+              }}
+            >
+              Edit Profile
+            </Text>
           </TouchableOpacity>
         </View>
-        <View>
-          <Text style={styles.title}>About me</Text>
-          <Text style={styles.description}>
-            Hey, I'm {userName}. I’m a Frontend Developer from Vietnam. I have a
-            passion for web development and love to create new things. I have
-            been working in the industry for over 5 years and have worked with
-            many clients to create beautiful websites. I am always looking for
-            new opportunities to learn and grow as a developer. I am currently
-            working as a freelancer and am always looking for new projects to
-            work on. If you have a project you would like to discuss, feel free
-            to contact me. I would love to hear from you!
-          </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 25,
+          }}
+        >
+          <View
+            style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>{followers}</Text>
+            <Text style={{ fontSize: 14, fontWeight: "500" }}>Followers</Text>
+          </View>
+          <View style={{ width: 1, height: 45, backgroundColor: "#ddd" }} />
+          <View
+            style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>{posts}</Text>
+            <Text style={{ fontSize: 14, fontWeight: "500" }}>Post</Text>
+          </View>
+          <View style={{ width: 1, height: 45, backgroundColor: "#ddd" }} />
+          <View
+            style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>{reviews}</Text>
+            <Text style={{ fontSize: 14, fontWeight: "500" }}>Reviews</Text>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.title}>My photos</Text>
+          </View>
+          <View style={styles.imageContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/Data/profile1.jpg")}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/Data/profile2.jpg")}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={styles.title}>About me</Text>
+            <Text style={styles.description}>
+              Hey, I'm {userName}. I’m a Frontend Developer from Vietnam. I have
+              a passion for web development and love to create new things. I
+              have been working in the industry for over 5 years and have worked
+              with many clients to create beautiful websites. I am always
+              looking for new opportunities to learn and grow as a developer. I
+              am currently working as a freelancer and am always looking for new
+              projects to work on. If you have a project you would like to
+              discuss, feel free to contact me. I would love to hear from you!
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -162,7 +164,6 @@ const Screen_04 = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     padding: 16,
     backgroundColor: "#FFFFFF",
   },

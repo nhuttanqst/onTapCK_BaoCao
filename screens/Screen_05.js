@@ -123,115 +123,122 @@ export default function Screen_05({ route }) {
 
   return (
     <View style={styles.groupContainer}>
-      <AntDesign
-        style={{ padding: 20, paddingBottom: 0 }}
-        name="arrowleft"
-        size={24}
-        color="black"
-        onPress={() => navigation.goBack()}
-      />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Update Profile</Text>
-          <Image
-            source={require("../assets/Data/avatar.png")}
-            style={styles.image}
-          />
-          <Text style={styles.textName}>{userName}</Text>
-          <View style={styles.inputContainer}>
-            <Text style={styles.textField}>Name</Text>
-            <TextInput
-              placeholder="Name"
-              value={name}
-              onChangeText={setName}
-              style={styles.input}
+      <ScrollView style={{ height: 400, width: "100%" }}>
+        <AntDesign
+          style={{ padding: 20, paddingBottom: 0 }}
+          name="arrowleft"
+          size={24}
+          color="black"
+          onPress={() => navigation.goBack()}
+        />
+        <View>
+          <View style={styles.container}>
+            <Text style={styles.title}>Update Profile</Text>
+            <Image
+              source={require("../assets/Data/avatar.png")}
+              style={styles.image}
             />
-            {errors.name && <Text style={{ color: "red" }}>{errors.name}</Text>}
-            <Text style={styles.textField}>Password</Text>
-            <TextInput
-              placeholder="Password"
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword}
-              style={styles.input}
-            />
-            {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password}</Text>
-            )}
-            <Text style={styles.textField}>Re password</Text>
-            <TextInput
-              placeholder="Re Password"
-              secureTextEntry
-              value={rePassword}
-              onChangeText={setRePassword}
-              style={styles.input}
-            />
-            {errors.rePassword && (
-              <Text style={{ color: "red" }}>{errors.rePassword}</Text>
-            )}
-          </View>
-          <TouchableOpacity style={styles.button} onPress={handleUpdateProfile}>
-            <Text style={styles.buttonText}>Update</Text>
-          </TouchableOpacity>
-
-          <Text style={{ marginVertical: 5 }}>or</Text>
-
-          <TouchableOpacity
-            style={styles.deleteButton}
-            onPress={confirmDeleteAccount}
-          >
-            <Text style={styles.deleteButtonText}>Delete Account</Text>
-          </TouchableOpacity>
-
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(false);
-            }}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalWrapper}>
-                <Text style={styles.modalText}>{modalMessage}</Text>
-                <TouchableOpacity
-                  style={styles.modalButton}
-                  onPress={() => setModalVisible(false)}
-                >
-                  <Text style={styles.modalButtonText}>OK</Text>
-                </TouchableOpacity>
-              </View>
+            <Text style={styles.textName}>{userName}</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.textField}>Name</Text>
+              <TextInput
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
+                style={styles.input}
+              />
+              {errors.name && (
+                <Text style={{ color: "red" }}>{errors.name}</Text>
+              )}
+              <Text style={styles.textField}>Password</Text>
+              <TextInput
+                placeholder="Password"
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+                style={styles.input}
+              />
+              {errors.password && (
+                <Text style={{ color: "red" }}>{errors.password}</Text>
+              )}
+              <Text style={styles.textField}>Re password</Text>
+              <TextInput
+                placeholder="Re Password"
+                secureTextEntry
+                value={rePassword}
+                onChangeText={setRePassword}
+                style={styles.input}
+              />
+              {errors.rePassword && (
+                <Text style={{ color: "red" }}>{errors.rePassword}</Text>
+              )}
             </View>
-          </Modal>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleUpdateProfile}
+            >
+              <Text style={styles.buttonText}>Update</Text>
+            </TouchableOpacity>
 
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={confirmDeleteModalVisible}
-            onRequestClose={handleCancelDelete}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalWrapper}>
-                <Text style={styles.modalText}>
-                  Are you sure you want to delete your account?
-                </Text>
-                <View style={styles.modalButtonContainer}>
+            <Text style={{ marginVertical: 5 }}>or</Text>
+
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={confirmDeleteAccount}
+            >
+              <Text style={styles.deleteButtonText}>Delete Account</Text>
+            </TouchableOpacity>
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(false);
+              }}
+            >
+              <View style={styles.modalContainer}>
+                <View style={styles.modalWrapper}>
+                  <Text style={styles.modalText}>{modalMessage}</Text>
                   <TouchableOpacity
                     style={styles.modalButton}
-                    onPress={handleConfirmDelete}
+                    onPress={() => setModalVisible(false)}
                   >
-                    <Text style={styles.modalButtonText}>Yes</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.modalButtonCancel}
-                    onPress={handleCancelDelete}
-                  >
-                    <Text style={styles.modalButtonText}>No</Text>
+                    <Text style={styles.modalButtonText}>OK</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
-          </Modal>
+            </Modal>
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={confirmDeleteModalVisible}
+              onRequestClose={handleCancelDelete}
+            >
+              <View style={styles.modalContainer}>
+                <View style={styles.modalWrapper}>
+                  <Text style={styles.modalText}>
+                    Are you sure you want to delete your account?
+                  </Text>
+                  <View style={styles.modalButtonContainer}>
+                    <TouchableOpacity
+                      style={styles.modalButton}
+                      onPress={handleConfirmDelete}
+                    >
+                      <Text style={styles.modalButtonText}>Yes</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.modalButtonCancel}
+                      onPress={handleCancelDelete}
+                    >
+                      <Text style={styles.modalButtonText}>No</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </Modal>
+          </View>
         </View>
       </ScrollView>
     </View>

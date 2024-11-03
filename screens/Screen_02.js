@@ -153,7 +153,13 @@ const Screen_02 = ({ route }) => {
             </View>
           </View>
 
-          <View>
+          <View
+            style={{
+              paddingHorizontal: 30,
+              paddingTop: 20,
+              paddingBottom: 120,
+            }}
+          >
             <View>
               <View style={styles.categoryInfo}>
                 <Text style={styles.categoryText}>Category</Text>
