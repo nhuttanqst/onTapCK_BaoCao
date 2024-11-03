@@ -78,205 +78,200 @@ const Screen_02 = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Image
-            style={styles.logoicon}
-            source={require("../assets/Data/logoicon.png")}
-          />
-          <View style={styles.inputGroup}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search here..."
-            />
-            <Image
-              style={styles.searchIcon}
-              source={require("../assets/Data/searchicon.png")}
-            />
-          </View>
-        </View>
-        <View style={styles.headerBottom}>
-          <View style={styles.headerBottomLeft}>
-            <Image
-              style={styles.personicon}
-              source={require("../assets/Data/avatar.png")}
-            />
-            <View>
-              <Text style={styles.text}>Welcome, {userName}!</Text>
-              <TouchableOpacity
-                onPress={handleLogout}
-                style={styles.logoutButton}
-              >
-                <Text style={styles.logoutButtonText}>Log out</Text>
-              </TouchableOpacity>
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ height: 500, width: "100%" }}>
+        <View>
+          <View style={styles.header}>
+            <View style={styles.headerTop}>
+              <Image
+                style={styles.logoicon}
+                source={require("../assets/Data/logoicon.png")}
+              />
+              <View style={styles.inputGroup}>
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder="Search here..."
+                />
+                <Image
+                  style={styles.searchIcon}
+                  source={require("../assets/Data/searchicon.png")}
+                />
+              </View>
             </View>
-          </View>
-
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={logoutModalVisible}
-            onRequestClose={cancelLogout}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <Text style={styles.modalText}>
-                  Are you sure you want to log out?
-                </Text>
-                <View style={styles.modalButtonContainer}>
+            <View style={styles.headerBottom}>
+              <View style={styles.headerBottomLeft}>
+                <Image
+                  style={styles.personicon}
+                  source={require("../assets/Data/avatar.png")}
+                />
+                <View>
+                  <Text style={styles.text}>Welcome, {userName}!</Text>
                   <TouchableOpacity
-                    onPress={confirmLogout}
-                    style={styles.modalButton}
+                    onPress={handleLogout}
+                    style={styles.logoutButton}
                   >
-                    <Text style={styles.modalButtonText}>OK</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={cancelLogout}
-                    style={styles.modalButtonCancel}
-                  >
-                    <Text style={styles.modalButtonText}>CANCEL</Text>
+                    <Text style={styles.logoutButtonText}>Log out</Text>
                   </TouchableOpacity>
                 </View>
               </View>
+
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={logoutModalVisible}
+                onRequestClose={cancelLogout}
+              >
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalContent}>
+                    <Text style={styles.modalText}>
+                      Are you sure you want to log out?
+                    </Text>
+                    <View style={styles.modalButtonContainer}>
+                      <TouchableOpacity
+                        onPress={confirmLogout}
+                        style={styles.modalButton}
+                      >
+                        <Text style={styles.modalButtonText}>OK</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={cancelLogout}
+                        style={styles.modalButtonCancel}
+                      >
+                        <Text style={styles.modalButtonText}>CANCEL</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+
+              <TouchableOpacity>
+                <Image
+                  style={styles.ringicon}
+                  source={require("../assets/Data/ringicon.png")}
+                />
+              </TouchableOpacity>
             </View>
-          </Modal>
+          </View>
 
-          <TouchableOpacity>
-            <Image
-              style={styles.ringicon}
-              source={require("../assets/Data/ringicon.png")}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+          <View>
+            <View>
+              <View style={styles.categoryInfo}>
+                <Text style={styles.categoryText}>Category</Text>
+                <TouchableOpacity>
+                  <Image
+                    style={styles.baGach}
+                    source={require("../assets/Data/3gach.png")}
+                  />
+                </TouchableOpacity>
+              </View>
 
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingTop: 20,
-          paddingHorizontal: 35,
-          paddingBottom: 120,
-        }}
-        scrollEnabled={true}
-        nestedScrollEnabled={true}
-      >
-        <View>
-          <View style={styles.categoryInfo}>
-            <Text style={styles.categoryText}>Category</Text>
+              <FlatList
+                data={categories}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.categoryItem}>
+                    <Image
+                      style={{ width: 70, height: 70, borderRadius: 50 }}
+                      source={{ uri: item.image }}
+                    />
+                    <Text>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                }}
+                scrollEnabled={false}
+              />
+            </View>
+
+            <View style={styles.popularDestination}>
+              <View style={styles.populationInfo}>
+                <Text style={styles.populationText}>Popular Destination</Text>
+                <TouchableOpacity>
+                  <Image
+                    style={styles.baGach}
+                    source={require("../assets/Data/3gach.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <FlatList
+                data={locations.filter((item) => item.type === "popular")}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.populationItem}>
+                    <Image
+                      style={{ width: 100, height: 100, borderRadius: 14 }}
+                      source={{ uri: item.image }}
+                    />
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={styles.populationList}
+                scrollEnabled={false}
+              />
+            </View>
+
+            <View style={styles.recommended}>
+              <View style={styles.recommendedInfo}>
+                <Text style={styles.recommendedText}>Recommended</Text>
+              </View>
+
+              <FlatList
+                data={locations.filter((item) => item.type === "recommended")}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.recommendedItem}>
+                    <Image
+                      style={{ width: 150, height: 150, borderRadius: 14 }}
+                      source={{ uri: item.image }}
+                    />
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={styles.recommendedList}
+                scrollEnabled={false}
+              />
+            </View>
+          </View>
+
+          <View style={styles.footer}>
             <TouchableOpacity>
               <Image
-                style={styles.baGach}
-                source={require("../assets/Data/3gach.png")}
+                style={{ width: 40, height: 40 }}
+                source={require("../assets/Data/homeicon.png")}
               />
+              <Text style={{ color: "white" }}>Home</Text>
             </TouchableOpacity>
-          </View>
 
-          <FlatList
-            data={categories}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.categoryItem}>
-                <Image
-                  style={{ width: 70, height: 70, borderRadius: 50 }}
-                  source={{ uri: item.image }}
-                />
-                <Text>{item.name}</Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-            scrollEnabled={false}
-          />
-        </View>
-
-        <View style={styles.popularDestination}>
-          <View style={styles.populationInfo}>
-            <Text style={styles.populationText}>Popular Destination</Text>
             <TouchableOpacity>
               <Image
-                style={styles.baGach}
-                source={require("../assets/Data/3gach.png")}
+                style={{ width: 40, height: 40 }}
+                source={require("../assets/Data/exploreicon.png")}
               />
+              <Text style={{ color: "white" }}>Explore</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <Image
+                style={{ width: 40, height: 40 }}
+                source={require("../assets/Data/searchicon1.png")}
+              />
+              <Text style={{ color: "white" }}>Search</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Screen_04", { email })}
+            >
+              <Image
+                style={{ width: 40, height: 40 }}
+                source={require("../assets/Data/profileicon.png")}
+              />
+              <Text style={{ color: "white" }}>Profile</Text>
             </TouchableOpacity>
           </View>
-
-          <FlatList
-            data={locations.filter((item) => item.type === "popular")}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.populationItem}>
-                <Image
-                  style={{ width: 100, height: 100, borderRadius: 14 }}
-                  source={{ uri: item.image }}
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.populationList}
-            scrollEnabled={false}
-          />
-        </View>
-
-        <View style={styles.recommended}>
-          <View style={styles.recommendedInfo}>
-            <Text style={styles.recommendedText}>Recommended</Text>
-          </View>
-
-          <FlatList
-            data={locations.filter((item) => item.type === "recommended")}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.recommendedItem}>
-                <Image
-                  style={{ width: 150, height: 150, borderRadius: 14 }}
-                  source={{ uri: item.image }}
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.recommendedList}
-            scrollEnabled={false}
-          />
         </View>
       </ScrollView>
-
-      <View style={styles.footer}>
-        <TouchableOpacity>
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/Data/homeicon.png")}
-          />
-          <Text style={{ color: "white" }}>Home</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/Data/exploreicon.png")}
-          />
-          <Text style={{ color: "white" }}>Explore</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/Data/searchicon1.png")}
-          />
-          <Text style={{ color: "white" }}>Search</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Screen_04", { email })}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/Data/profileicon.png")}
-          />
-          <Text style={{ color: "white" }}>Profile</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
