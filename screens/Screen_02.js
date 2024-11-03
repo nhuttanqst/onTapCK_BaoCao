@@ -277,9 +277,6 @@ const Screen_02 = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   header: {
     backgroundColor: "#5958b2",
     padding: 30,
