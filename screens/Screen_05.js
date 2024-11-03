@@ -250,9 +250,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  scrollContainer: {
-    flexGrow: 1,
-  },
   container: {
     justifyContent: "center",
     alignItems: "center",
