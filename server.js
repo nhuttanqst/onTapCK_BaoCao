@@ -22,6 +22,28 @@ app.get("/", (req, res) => {
   return res.json("From Backend Side");
 });
 
+app.get("/categories", (req, res) => {
+  const sql = "SELECT * FROM category";
+  db.query(sql, (err, data) => {
+    if (err) {
+      console.log("Error fetching categories:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+    return res.json(data);
+  });
+});
+
+app.get("/locations", (req, res) => {
+  const sql = "SELECT * FROM location";
+  db.query(sql, (err, data) => {
+    if (err) {
+      console.log("Error fetching locations:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+    return res.json(data);
+  });
+});
+
 app.get("/user/:email", (req, res) => {
   const email = req.params.email;
   const sql = "SELECT name FROM login WHERE email = ?";

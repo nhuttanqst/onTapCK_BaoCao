@@ -26,10 +26,10 @@ const Screen_02 = ({ route }) => {
     const fetchData = async () => {
       try {
         const categoriesResponse = await axios.get(
-          "https://671d0fbd09103098807c2176.mockapi.io/category"
+          "http://localhost:8081/categories"
         );
         const locationsResponse = await axios.get(
-          "https://671d0fbd09103098807c2176.mockapi.io/location"
+          "http://localhost:8081/locations"
         );
         setCategories(categoriesResponse.data);
         setLocations(locationsResponse.data);
